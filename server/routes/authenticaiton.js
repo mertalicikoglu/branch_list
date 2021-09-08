@@ -29,7 +29,6 @@ router.use('/api/*', async (req, res, next) => {
         const token = req.body.token || req.query.token || req.headers['x-access-token']
         let session = new Session(token)
         let account = await session.control()
-        console.log("account",account)
         req.account = account
         next()
     } catch (error) {
