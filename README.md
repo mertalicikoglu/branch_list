@@ -4,7 +4,7 @@ Api that lists branches information
 
 ## How to run
 
-Before anything else, you must have node installed on your machine.
+Before anything else, you must have node installed on your machine. You can find information about db in config/options path. In order for the tables to be created automatically, you just need to create a database called mindbehind and enter the user name and password information.
 
 ### Running Dev Server
 
