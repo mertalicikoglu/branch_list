@@ -9,12 +9,12 @@ class Session {
     control() {
         return new Promise((resolve, reject) => {
             try {
-                if (token) {
+                if (this.token) {
                     jwt.verify(this.token, config.secret, (err, payload) => {
                         if (err) {
                             reject({ status: 401 })
                         }
-                        resolve()
+                        resolve(payload.data)
                     })
                 } else {
                     reject({ status: 401 })

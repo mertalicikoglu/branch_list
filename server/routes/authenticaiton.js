@@ -1,4 +1,4 @@
-const express = require('express')
+import express from 'express';
 
 const router = express.Router({ caseSensitive: true })
 
@@ -8,17 +8,18 @@ const Session = require("../libs/session").Session
 
 
 
-router.post("/api/login", async (req, res, next) => {
+router.post("/auth/login", async (req, res, next) => {
     try {
         const db = req.app.get('db');
-        let login = await new Login(req.body.username, req.body.password, db)
-        res.json(login)
+        let login = new Login(req.body.username, req.body.password, db)
+        let response = await login.login();
+        return res.json(response)
     } catch (error) {
         if (error.status) {
             res.sendStatus(error.status)
             return
         }
-        next()
+        next(error)
     }
 });
 
@@ -26,14 +27,17 @@ router.post("/api/login", async (req, res, next) => {
 router.use('/api/*', async (req, res, next) => {
     try {
         const token = req.body.token || req.query.token || req.headers['x-access-token']
-        let session = await new Session(token)
-        res.json(session)
+        let session = new Session(token)
+        let account = await session.control()
+        console.log("account",account)
+        req.account = account
+        next()
     } catch (error) {
         if (error.status) {
             res.sendStatus(error.status)
             return
         }
-        next()
+        res.sendStatus(401)
     }
 
 })
