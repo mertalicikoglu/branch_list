@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs')
+
 module.exports = {
     seed(models, callback) {
 
@@ -50,6 +52,7 @@ module.exports = {
                 username: 'admin',
                 firstname: 'Admin',
                 lastname: '.',
+                password: bcrypt.hashSync('123456'),
             },
             {
                 id: 2,
@@ -57,13 +60,15 @@ module.exports = {
                 username: 'employee1',
                 firstname: 'employee1',
                 lastname: '.',
+                password: bcrypt.hashSync('123456'),
             },
             {
                 id: 3,
                 firmId: 1,
                 username: 'employee2',
                 firstname: 'employee1',
-                lastname: '.'
+                lastname: '.',
+                password: bcrypt.hashSync('123456')
             }
         ]
 
