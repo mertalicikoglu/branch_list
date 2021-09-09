@@ -4,7 +4,15 @@ Api that lists branches information
 
 ## How to run
 
-Before anything else, you must have node installed on your machine. You can find information about db in config/options path. In order for the tables to be created automatically, you just need to create a database called mindbehind and enter the user name and password information.
+## Run Nodejs MySQL with Docker Compose
+
+We can easily run the whole with only a single command:
+docker-compose up
+
+## Stop the Application
+
+Stopping all the running containers is also simple with a single command:
+docker-compose down
 
 ### Running Dev Server
 

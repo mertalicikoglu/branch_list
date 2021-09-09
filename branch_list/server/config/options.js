@@ -6,9 +6,10 @@ module.exports = {
   },
   db: {
     uri:
-      'mysql://root:123456@localhost:3306/mindbehind',
+      'mysql://root:123456@mysqldb:3306/mindbehind',
     name: 'mindbehind',
-    host: 'localhost',
+    host: "mysqldb",
+    port: 3306,
     username: 'root',
     password: '123456',
     dialect: 'mysql',

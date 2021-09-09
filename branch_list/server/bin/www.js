@@ -5,6 +5,7 @@
  */
 
  import app from '../app';
+ require("dotenv").config();
  import debugLib from 'debug';
  import http from 'http';
 
@@ -14,7 +15,7 @@ var debug = debugLib('myapp:server');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.NODE_DOCKER_PORT || 8080);
 app.set('port', port);
 
 /**

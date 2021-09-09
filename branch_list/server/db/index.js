@@ -17,8 +17,9 @@ const sequelize = new Sequelize(
   config.db.username,
   config.db.password, {
   host: config.db.host,
+  port: config.db.port,
   dialect: config.db.dialect,
-  operatorsAliases: false,
+  operatorsAliases: 0,
   pool: {
     max: config.db.pool.max,
     min: config.db.pool.min,
@@ -40,24 +41,27 @@ associations.associate(models)
 sequelize
   .authenticate()
   .then(() => {
-    // Sync DB schema
-    sequelize
-      .sync({
-        logging: false,
-        // alter: true,
-      })
-      .then(() => {
-        seeder.seed(models, () => {
-          console.log('[sequelize] database synced\n')
+    setTimeout(() => {
+      // Sync DB schema
+      sequelize
+        .sync({
+          logging: false,
+          // alter: true,
         })
-      })
+        .then(() => {
+          seeder.seed(models, () => {
+            console.log('[sequelize] database synced\n')
+          })
+        })
+        .catch((err) => {
+          console.log(`\n${err.message}\n${err.stack}\n`)
+        })
+    })
       .catch((err) => {
         console.log(`\n${err.message}\n${err.stack}\n`)
       })
-  })
-  .catch((err) => {
-    console.log(`\n${err.message}\n${err.stack}\n`)
-  })
+  }, 3000);
+
 
 module.exports = {
   models,
